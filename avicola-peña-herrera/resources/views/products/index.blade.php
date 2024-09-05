@@ -7,7 +7,7 @@
     <!-- Encabezado -->
     <div class="mb-4 text-center">
         <h1 class="display-4 mb-3">Nuestros Productos</h1>
-        <p class="lead">Explora nuestra selección de productos de alta calidad.</p>
+        <!--<p class="lead">Explora nuestra selección de productos de alta calidad.</p>-->
     </div>
 
     <!-- Tarjetas de Productos -->
