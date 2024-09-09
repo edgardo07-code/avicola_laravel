@@ -41,17 +41,19 @@
             @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="image" class="form-label"><i class="fa fa-image"></i> Imagen del Producto</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
-            @error('imagen')
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+            <div>
+                <label for="image" class="form-label"><i class="fa fa-image"></i> Imagen del Producto</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+            </div>
+            @error('image')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
+            <div>
+                <img id="preview" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; max-width: 300px;">
+            </div>
         </div>
 
-        <div class="mb-3">
-            <img id="preview" src="#" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; max-width: 300px;">
-        </div>
 
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Producto</button>
     </form>
@@ -62,15 +64,31 @@
 <script>
     function previewImage(event) {
         var input = event.target;
-        var reader = new FileReader();
+        var preview = document.getElementById('preview');
 
-        reader.onload = function() {
-            var preview = document.getElementById('preview');
-            preview.src = reader.result;
-            preview.style.display = 'block';
-        };
+        if (input.files && input.files[0]) {
+            var file = input.files[0];
 
-        reader.readAsDataURL(input.files[0]);
+            // Validar si el archivo es una imagen
+            if (file.type.startsWith('image/')) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Si no es una imagen, ocultar la vista previa
+                preview.src = '';
+                preview.style.display = 'none';
+                alert('Por favor selecciona un archivo de imagen válido.');
+            }
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
     }
 </script>
 @endsection

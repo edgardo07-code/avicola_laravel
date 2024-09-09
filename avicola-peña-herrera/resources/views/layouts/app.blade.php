@@ -70,6 +70,7 @@
     </footer>
 
     <!-- Font Awesome Kit -->
+    @yield('scripts')
     <script src="https://kit.fontawesome.com/7e8a796a07.js" crossorigin="anonymous"></script>
 </body>
 

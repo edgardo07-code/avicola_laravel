@@ -11,6 +11,7 @@
                     <h3 class="card-title"><i class="fa fa-box"></i> Detalles del Producto</h3>
                 </div>
                 <div class="card-body">
+                    <img src="{{ Storage::url($product->product_image) }}" class="card-img-top" style="max-width: 200px" alt="{{ $product->name }}">
                     <h5 class="card-title"><i class="fa fa-tag"></i> {{ $product->name }}</h5>
                     <p class="card-text"><strong>Descripción:</strong> {{ $product->description }}</p>
                     <p class="card-text"><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>

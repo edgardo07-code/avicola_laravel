@@ -4,8 +4,14 @@
 
 @section('contenido')
 <div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-3">
     <h2 class="mb-4"><i class="fa fa-box"></i> Editar Producto</h2>
-
+    <div class="mb-3">
+        @if($product->product_image)
+        <img src="{{ Storage::url($product->product_image) }}" alt="Imagen Actual del Producto" class="img-thumbnail" style="max-width: 200px;">
+    @endif
+    </div>
+</div>
     <form action="/products/{{ $product->id }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT') <!-- Método PUT para actualización -->
@@ -42,20 +48,20 @@
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+            <div>
             <label for="image" class="form-label"><i class="fa fa-image"></i> Imagen del Producto</label>
             <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
             @error('image')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
+            </div>
+            <div>
+                <img id="preview" src="#" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; max-width: 300px;">
+            </div>
         </div>
 
-        <div class="mb-3">
-            @if($product->product_image)
-                <img src="{{ Storage::url($product->product_image) }}" alt="Imagen Actual del Producto" class="img-thumbnail" style="max-width: 300px;">
-            @endif
-            <img id="preview" src="#" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; max-width: 300px;">
-        </div>
+
 
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Cambios</button>
     </form>
